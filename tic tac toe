@@ -1,0 +1,60 @@
+b = [" "," "," "," "," "," "," "," "," "]
+
+def show():
+    print(b[0],"|",b[1],"|",b[2])
+    print("-------")
+    print(b[3],"|",b[4],"|",b[5])
+    print("-------")
+    print(b[6],"|",b[7],"|",b[8])
+
+def winner(p):
+    if b[0]==p and b[1]==p and b[2]==p: return True
+    if b[3]==p and b[4]==p and b[5]==p: return True
+    if b[6]==p and b[7]==p and b[8]==p: return True
+    if b[0]==p and b[3]==p and b[6]==p: return True
+    if b[1]==p and b[4]==p and b[7]==p: return True
+    if b[2]==p and b[5]==p and b[8]==p: return True
+    if b[0]==p and b[4]==p and b[8]==p: return True
+    if b[2]==p and b[4]==p and b[6]==p: return True
+    return False
+
+turn = "X"
+
+while True:
+    show()
+    move = input("where do u wanna go (0-8) : ")
+
+    if move == "":
+        print("you didnt type anything")
+        continue
+
+    if not move.isdigit():
+        print("type a number pls")
+        continue
+
+    move = int(move)
+
+    if move < 0 or move > 8:
+        print("number too big or small")
+        continue
+
+    if b[move] != " ":
+        print("someone already put something there")
+        continue
+
+    b[move] = turn
+
+    if winner(turn):
+        show()
+        print(turn, "wins !!")
+        break
+
+    if " " not in b:
+        show()
+        print("nobody wins its a draw")
+        break
+
+    if turn == "X":
+        turn = "O"
+    else:
+        turn = "X"
